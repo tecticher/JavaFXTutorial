@@ -81,7 +81,11 @@ public class MainApp extends Application {
             primaryStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("IOException");
+            alert.setContentText("Error message:\n" + e.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -126,7 +130,11 @@ public class MainApp extends Application {
             dialogStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("IOException");
+            alert.setContentText("Error message:\n" + e.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -227,7 +235,11 @@ public class MainApp extends Application {
             PersonOverviewController controller = loader.getController();
             controller.setMainApp(this);
         } catch (IOException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("IOException");
+            alert.setContentText("Error message:\n" + e.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -265,7 +277,11 @@ public class MainApp extends Application {
 
             return controller.isOkClicked();
         } catch (IOException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("IOException");
+            alert.setContentText("Error message:\n" + e.getMessage());
+            alert.showAndWait();
             return false;
         }
     }
