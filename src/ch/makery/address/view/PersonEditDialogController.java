@@ -36,6 +36,7 @@ public class PersonEditDialogController {
     }
 
     public void setDialogStage(Stage stage) {
+
         this.dialogStage = dialogStage;
     }
 
@@ -56,6 +57,7 @@ public class PersonEditDialogController {
      * @return
      */
     public boolean isOkClicked() {
+
         return okClicked;
     }
 
