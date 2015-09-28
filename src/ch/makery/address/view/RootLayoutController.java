@@ -30,12 +30,29 @@ public class RootLayoutController {
     }
 
     /**
+     * Filter NullPointerException
+     *
+     * @return
+     */
+    private MainApp getMainApp() {
+        if (mainApp == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("NullPointerException");
+            alert.setContentText("Error message:\nRootLayoutController: mainApp reference is null. Aborting application");
+            alert.showAndWait();
+            System.exit(1);
+        }
+        return mainApp;
+    }
+
+    /**
      * Creates an empty address book.
      */
     @FXML
     private void handleNew() {
-        mainApp.getPersonData().clear();
-        mainApp.setPersonFilePath(null);
+        getMainApp().getPersonData().clear();
+        getMainApp().setPersonFilePath(null);
     }
 
     /**
@@ -51,10 +68,10 @@ public class RootLayoutController {
         fileChooser.getExtensionFilters().add(extFilter);
 
         // Show save file dialog
-        File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
+        File file = fileChooser.showOpenDialog(getMainApp().getPrimaryStage());
 
         if (file != null) {
-            mainApp.loadPersonDataFromFile(file);
+            getMainApp().loadPersonDataFromFile(file);
         }
     }
 
@@ -64,9 +81,9 @@ public class RootLayoutController {
      */
     @FXML
     private void handleSave() {
-        File personFile = mainApp.getPersonFilePath();
+        File personFile = getMainApp().getPersonFilePath();
         if (personFile != null) {
-            mainApp.savePersonDataToFile(personFile);
+            getMainApp().savePersonDataToFile(personFile);
         } else {
             handleSaveAs();
         }
@@ -85,14 +102,14 @@ public class RootLayoutController {
         fileChooser.getExtensionFilters().add(extFilter);
 
         // Show save file dialog
-        File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
+        File file = fileChooser.showSaveDialog(getMainApp().getPrimaryStage());
 
         if (file != null) {
             // Make sure it has the correct extension
             if (!file.getPath().endsWith(".xml")) {
                 file = new File(file.getPath() + ".xml");
             }
-            mainApp.savePersonDataToFile(file);
+            getMainApp().savePersonDataToFile(file);
         }
     }
 
@@ -101,7 +118,7 @@ public class RootLayoutController {
      */
     @FXML
     private void handleShowBirthdayStatistics() {
-        mainApp.showBirthdayStatistics();
+        getMainApp().showBirthdayStatistics();
     }
 
     /**
