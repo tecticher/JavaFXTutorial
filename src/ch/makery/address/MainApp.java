@@ -227,7 +227,6 @@ public class MainApp extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/PersonOverview.fxml"));
-
             AnchorPane personOverview = (AnchorPane) loader.load();
 
             // Set the person overview into the center of the layout
@@ -236,6 +235,7 @@ public class MainApp extends Application {
             // Give the controller access to the main app
             PersonOverviewController controller = loader.getController();
             controller.setMainApp(this);
+
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
