@@ -37,9 +37,6 @@ public class Person {
 
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
-
-
-        // Some initial dummy data, just for convenient testing.
         this.street = new SimpleStringProperty("");
         this.postalCode = new SimpleStringProperty("");
         this.city = new SimpleStringProperty("");
@@ -48,7 +45,6 @@ public class Person {
     }
 
     /**
-     *
      * @return
      */
     public String getFirstName() {
@@ -56,7 +52,6 @@ public class Person {
     }
 
     /**
-     *
      * @param firstName
      */
     public void setFirstName(String firstName) {
@@ -64,7 +59,6 @@ public class Person {
     }
 
     /**
-     *
      * @return
      */
     public StringProperty firstNameProperty() {
@@ -72,7 +66,6 @@ public class Person {
     }
 
     /**
-     *
      * @return
      */
     public String getLastName() {
@@ -80,7 +73,6 @@ public class Person {
     }
 
     /**
-     *
      * @param lastName
      */
     public void setLastName(String lastName) {
@@ -88,7 +80,6 @@ public class Person {
     }
 
     /**
-     *
      * @return
      */
     public StringProperty lastNameProperty() {
@@ -96,7 +87,6 @@ public class Person {
     }
 
     /**
-     *
      * @return
      */
     public String getStreet() {
@@ -104,7 +94,6 @@ public class Person {
     }
 
     /**
-     *
      * @param street
      */
     public void setStreet(String street) {
@@ -112,7 +101,6 @@ public class Person {
     }
 
     /**
-     *
      * @return
      */
     public StringProperty streetProperty() {
@@ -120,7 +108,6 @@ public class Person {
     }
 
     /**
-     *
      * @return
      */
     public String getPostalCode() {
@@ -128,7 +115,6 @@ public class Person {
     }
 
     /**
-     *
      * @param postalCode
      */
     public void setPostalCode(String postalCode) {
@@ -136,7 +122,6 @@ public class Person {
     }
 
     /**
-     *
      * @return
      */
     public StringProperty postalCodeProperty() {
@@ -144,7 +129,6 @@ public class Person {
     }
 
     /**
-     *
      * @return
      */
     public String getCity() {
@@ -152,7 +136,6 @@ public class Person {
     }
 
     /**
-     *
      * @param city
      */
     public void setCity(String city) {
@@ -160,7 +143,6 @@ public class Person {
     }
 
     /**
-     *
      * @return
      */
     public StringProperty cityProperty() {
@@ -168,7 +150,6 @@ public class Person {
     }
 
     /**
-     *
      * @return
      */
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
@@ -177,7 +158,6 @@ public class Person {
     }
 
     /**
-     *
      * @param birthday
      */
     public void setBirthday(LocalDate birthday) {
@@ -185,7 +165,6 @@ public class Person {
     }
 
     /**
-     *
      * @return
      */
     public ObjectProperty<LocalDate> birthdayProperty() {
