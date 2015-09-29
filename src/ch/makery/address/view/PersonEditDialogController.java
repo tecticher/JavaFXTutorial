@@ -1,14 +1,17 @@
 package ch.makery.address.view;
 
-import ch.makery.address.model.Person;
-import ch.makery.address.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import ch.makery.address.model.Person;
+import ch.makery.address.util.DateUtil;
 
 /**
- * Created by usuario on 27/9/15.
+ * Dialog to edit details of a person.
+ *
+ * @author Marco Jakob
  */
 public class PersonEditDialogController {
 
@@ -25,30 +28,43 @@ public class PersonEditDialogController {
     @FXML
     private TextField birthdayField;
 
+
     private Stage dialogStage;
     private Person person;
     private boolean okClicked = false;
 
-
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     */
     @FXML
     private void initialize() {
-
     }
 
-    public void setDialogStage(Stage stage) {
-
+    /**
+     * Sets the stage of this dialog.
+     *
+     * @param dialogStage
+     */
+    public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
 
+    /**
+     * Sets the person to be edited in the dialog.
+     *
+     * @param person
+     */
     public void setPerson(Person person) {
         this.person = person;
+
         firstNameField.setText(person.getFirstName());
         lastNameField.setText(person.getLastName());
         streetField.setText(person.getStreet());
-        postalCodeField.setText(Integer.toString(person.getPostalCode()));
+        postalCodeField.setText(person.getPostalCode());
         cityField.setText(person.getCity());
         birthdayField.setText(DateUtil.format(person.getBirthday()));
-        birthdayField.setPromptText("dd.mm.yyyy");
+        birthdayField.setPromptText("dd/mm/yyyy");
     }
 
     /**
@@ -57,7 +73,6 @@ public class PersonEditDialogController {
      * @return
      */
     public boolean isOkClicked() {
-
         return okClicked;
     }
 
@@ -70,7 +85,7 @@ public class PersonEditDialogController {
             person.setFirstName(firstNameField.getText());
             person.setLastName(lastNameField.getText());
             person.setStreet(streetField.getText());
-            person.setPostalCode(Integer.parseInt(postalCodeField.getText()));
+            person.setPostalCode(postalCodeField.getText());
             person.setCity(cityField.getText());
             person.setBirthday(DateUtil.parse(birthdayField.getText()));
 
@@ -132,7 +147,7 @@ public class PersonEditDialogController {
             return true;
         } else {
             // Show the error message.
-            Alert alert = new Alert(Alert.AlertType.ERROR);
+            Alert alert = new Alert(AlertType.ERROR);
             alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please correct invalid fields");
@@ -143,5 +158,4 @@ public class PersonEditDialogController {
             return false;
         }
     }
-
 }

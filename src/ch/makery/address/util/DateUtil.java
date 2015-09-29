@@ -14,7 +14,7 @@ public class DateUtil {
     /**
      * The date pattern that is used for conversion. Change as you wish.
      */
-    private static final String DATE_PATTERN = "dd.MM.yyyy";
+    private static final String DATE_PATTERN = "dd/MM/yyyy";
 
     /**
      * The date formatter.

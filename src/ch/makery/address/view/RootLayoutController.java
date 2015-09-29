@@ -3,6 +3,7 @@ package ch.makery.address.view;
 import ch.makery.address.MainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -29,39 +30,68 @@ public class RootLayoutController {
     }
 
     /**
-     * Creates an empty address book
+     * Filter NullPointerException
+     *
+     * @return
+     */
+    private MainApp getMainApp() {
+        if (mainApp == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("NullPointerException");
+            alert.setContentText("Error message:\nRootLayoutController: mainApp reference is null. Aborting application");
+            alert.showAndWait();
+            System.exit(1);
+        }
+        return mainApp;
+    }
+
+    /**
+     * Creates an empty address book.
      */
     @FXML
     private void handleNew() {
-        mainApp.getPersonData().clear();
-        mainApp.setPersonFilePath(null);
+        getMainApp().getPersonData().clear();
+        getMainApp().setPersonFilePath(null);
     }
 
+    /**
+     * Opens a FileChooser to let the user select an address book to load.
+     */
     @FXML
     private void handleOpen() {
         FileChooser fileChooser = new FileChooser();
 
         // Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Files (*.xml)", "*.xml");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+                "XML files (*.xml)", "*.xml");
         fileChooser.getExtensionFilters().add(extFilter);
 
         // Show save file dialog
-        File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
-        if ( file != null ) {
-            mainApp.loadPersonDataFromFile(file);
+        File file = fileChooser.showOpenDialog(getMainApp().getPrimaryStage());
+
+        if (file != null) {
+            getMainApp().loadPersonDataFromFile(file);
         }
     }
 
+    /**
+     * Saves the file to the person file that is currently open. If there is no
+     * open file, the "save as" dialog is shown.
+     */
     @FXML
     private void handleSave() {
-        File personFile = mainApp.getPersonFilePath();
-        if ( personFile != null ) {
-            mainApp.savePersonDataToFile(personFile);
+        File personFile = getMainApp().getPersonFilePath();
+        if (personFile != null) {
+            getMainApp().savePersonDataToFile(personFile);
         } else {
             handleSaveAs();
         }
     }
 
+    /**
+     * Opens a FileChooser to let the user select a file to save to.
+     */
     @FXML
     private void handleSaveAs() {
         FileChooser fileChooser = new FileChooser();
@@ -72,22 +102,31 @@ public class RootLayoutController {
         fileChooser.getExtensionFilters().add(extFilter);
 
         // Show save file dialog
-        File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
+        File file = fileChooser.showSaveDialog(getMainApp().getPrimaryStage());
 
         if (file != null) {
             // Make sure it has the correct extension
             if (!file.getPath().endsWith(".xml")) {
                 file = new File(file.getPath() + ".xml");
             }
-            mainApp.savePersonDataToFile(file);
+            getMainApp().savePersonDataToFile(file);
         }
     }
+
+    /**
+     * Opens the birthday statistics.
+     */
+    @FXML
+    private void handleShowBirthdayStatistics() {
+        getMainApp().showBirthdayStatistics();
+    }
+
     /**
      * Opens an about dialog.
      */
     @FXML
     private void handleAbout() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("AddressApp");
         alert.setHeaderText("About");
         alert.setContentText("Author: Marco Jakob\nWebsite: http://code.makery.ch");
