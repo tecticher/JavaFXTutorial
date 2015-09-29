@@ -3,6 +3,7 @@ package ch.makery.address.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ch.makery.address.model.Person;
@@ -15,6 +16,7 @@ import ch.makery.address.util.DateUtil;
  */
 public class PersonEditDialogController {
 
+
     @FXML
     private TextField firstNameField;
     @FXML
@@ -26,7 +28,7 @@ public class PersonEditDialogController {
     @FXML
     private TextField cityField;
     @FXML
-    private TextField birthdayField;
+    private DatePicker birthdayField;
 
 
     private Stage dialogStage;
@@ -63,7 +65,7 @@ public class PersonEditDialogController {
         streetField.setText(person.getStreet());
         postalCodeField.setText(person.getPostalCode());
         cityField.setText(person.getCity());
-        birthdayField.setText(DateUtil.format(person.getBirthday()));
+        birthdayField.setValue(person.getBirthday());
         birthdayField.setPromptText("dd/mm/yyyy");
     }
 
@@ -87,7 +89,7 @@ public class PersonEditDialogController {
             person.setStreet(streetField.getText());
             person.setPostalCode(postalCodeField.getText());
             person.setCity(cityField.getText());
-            person.setBirthday(DateUtil.parse(birthdayField.getText()));
+            person.setBirthday(birthdayField.getValue());
 
             okClicked = true;
             dialogStage.close();
@@ -135,12 +137,8 @@ public class PersonEditDialogController {
             errorMessage += "No valid city!\n";
         }
 
-        if (birthdayField.getText() == null || birthdayField.getText().length() == 0) {
+        if (birthdayField.getValue().toString() == null || birthdayField.toString().length() == 0) {
             errorMessage += "No valid birthday!\n";
-        } else {
-            if (!DateUtil.validDate(birthdayField.getText())) {
-                errorMessage += "No valid birthday. Use the format dd.mm.yyyy!\n";
-            }
         }
 
         if (errorMessage.length() == 0) {
