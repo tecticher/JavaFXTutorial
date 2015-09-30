@@ -1,13 +1,14 @@
 package ch.makery.address.view;
 
+import ch.makery.address.model.Person;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import ch.makery.address.model.Person;
-import ch.makery.address.util.DateUtil;
 
 /**
  * Dialog to edit details of a person.
@@ -137,7 +138,8 @@ public class PersonEditDialogController {
             errorMessage += "No valid city!\n";
         }
 
-        if (birthdayField.getValue().toString() == null || birthdayField.toString().length() == 0) {
+
+        if (birthdayField.getValue() == null || birthdayField.toString().length() == 0) {
             errorMessage += "No valid birthday!\n";
         }
 
@@ -156,4 +158,6 @@ public class PersonEditDialogController {
             return false;
         }
     }
+
+
 }
